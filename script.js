@@ -28,12 +28,15 @@ function playMusic() {
   music.play();
 }
 
-document.addEventListener("mousemove", function (e) {
+function createCursorHeart(e) {
   const cursorHeart = document.createElement("div");
   cursorHeart.className = "cursor-heart";
   cursorHeart.textContent = "A<3D";
-  cursorHeart.style.left = `${e.pageX}px`;
-  cursorHeart.style.top = `${e.pageY}px`;
+  cursorHeart.style.left = `${e.pageX || e.touches[0].pageX}px`;
+  cursorHeart.style.top = `${e.pageY || e.touches[0].pageY}px`;
   document.body.appendChild(cursorHeart);
   setTimeout(() => cursorHeart.remove(), 1000);
-});
+}
+
+document.addEventListener("mousemove", createCursorHeart);
+document.addEventListener("touchmove", createCursorHeart);
